@@ -19,46 +19,24 @@
             integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
             crossorigin="anonymous"
         ></script>
+        <!-- Other (eg: styles, scripts) -->
+        <link rel="stylesheet" href="./style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <script src="./script.js" defer></script>
         <title>Forumerly</title>
     </head>
     <body>
-        <% if (user) { %>
-        <h1>Velkommen <%= user.name %></h1>
-        <a href="/auth/logout">Logud</a>
-
-        <form action="/api" method="post">
-            <h1>Lav et nyt blog post</h1>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Title</label>
-                <input
-                    type="text"
-                    name="title"
-                    class="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                />
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label"
-                    >Body</label
-                >
-                <textarea name="body" class="form-control"></textarea>
-            </div>
-            <div class="mb-3 form-check">
-                <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="exampleCheck1"
-                />
-                <label class="form-check-label" for="exampleCheck1"
-                    >Jeg accepter vilkår og betingelser</label
-                >
-            </div>
-            <button type="submit" class="btn btn-primary">Opret post</button>
-        </form>
-        <% } else { %>
-        <h1>Velkommen</h1>
-        <a href="/auth/google">Log ind</a>
-        <% } %>
+        <%- include("./components/Navbar.ejs") %>
+        <div class="container mt-5">
+            <% if (error.length > 0) { %>
+            <div class="alert alert-danger" role="alert"><%= error %></div>
+            <% } %>
+        </div>
     </body>
 </html>

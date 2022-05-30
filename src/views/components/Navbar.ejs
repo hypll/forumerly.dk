@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <% if (user) { %>
+        <a href="" class="navbar-brand">
+            <img
+                src="<%= user.avatar %> "
+                width="30"
+                height="30"
+                class="rounded-circle icon"
+            />
+        </a>
+        <% } else { %>
+        <a href="" class="navbar-brand">
+            <img
+                src="./icon.png"
+                width="30"
+                height="30"
+                class="rounded-circle icon"
+            />
+        </a>
+        <% } %>
+        <button
+            type="button"
+            class="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarCollapse"
+        >
+            <span class="navbar-toggler-icon" style="color: red"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a href="#" class="nav-item nav-link" id="home">Hjem</a>
+                <a href="#" class="nav-item nav-link">Alle inlæg </a>
+                <% if (user) { %>
+                <a href="#" class="nav-item nav-link">Min profil</a>
+                <% } %>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <% if (user) { %>
+                <div class="dropdown">
+                    <a
+                        class="dropdown-toggle"
+                        type="button"
+                        id="dropdown-itemer"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        <%= user.name %>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown-itemer">
+                        <li>
+                            <a class="dropdown-item" href="#"
+                                ><i class="fa-solid fa-user"></i> Min profil</a
+                            >
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/settings"
+                                ><i class="fa-solid fa-gear"></i>
+                                Indstillinger</a
+                            >
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li>
+                            <a class="dropdown-item danger" href="/auth/logout"
+                                >Log af</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+                <% } else { %>
+                <a href="/auth/google" class="nav-item nav-link btn-login"
+                    >Login</a
+                >
+                <% } %>
+            </div>
+        </div>
+    </div>
+</nav>

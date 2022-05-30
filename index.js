@@ -15,6 +15,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const PORT = process.env.PORT || 5000;
 const methodOverride = require("method-override");
+const flash = require("connect-flash");
 
 //  Middlewares & Sessions
 // Settings & Middlewares
@@ -44,6 +45,7 @@ app.use(
     })
 );
 app.use(methodOverride("_method"));
+app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());

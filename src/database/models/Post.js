@@ -5,6 +5,7 @@ const PostSchema = new mongoose.Schema(
         title: { type: String, required: [true, "Title is required"] },
         body: { type: String, required: [true, "Body is required"] },
         category: { type: String, required: [true, "Category is required"] },
+        views: { type: Number, default: 0 },
         tags: {
             type: [String],
             required: [true, "At least one tag is required"],

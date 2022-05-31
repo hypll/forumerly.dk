@@ -16,6 +16,19 @@ router.get("/forum", async (req, res) => {
     });
 });
 
+router.get("/forum/d/:id", async (req, res) => {
+    Post.findOne({ _id: req.params.id }, (err, discussion) => {
+        if (discussion === null || !discussion) {
+            res.redirect("/");
+        } else {
+            res.render("discussion", {
+                user: req.user,
+                post: discussion,
+            });
+        }
+    });
+});
+
 router.get("/forum/new", ensureAuth, (req, res) => {
     fetch(process.env.HOST + "/api/categories", {
         method: "GET",

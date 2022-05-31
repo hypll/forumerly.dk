@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Path /**/ -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Del billeder, blogs & meget andet" />
+        <meta name="author" content="Hypll" />
+        <!-- Bootstrap -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"
+        ></script>
+        <!-- Other (eg: styles, scripts) -->
+        <link rel="stylesheet" href="../../style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <script src="../../script.js" defer></script>
+        <title>Forumerly Discussion- <%= post.title %></title>
+    </head>
+    <body>
+        <%- include("./components/Navbar.ejs") %> <%-
+        include("./components/loader.ejs") %>
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h1 class="card-title fs-4">
+                                <%= post.title %>
+                            </h1>
+                             <a style="text-decoration: none;" href="/forum/<%= post.category.toLowerCase() %>">I <%= post.category %></a>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text text-muted">
+                                <%= post.body %>
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">
+                                <%= post.createdAt.toLocaleDateString() %> - <i class="fa-solid fa-eye"></i> <%= post.views  %> 
+                            </small>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">
+                                <% post.tags.map((tag) => { %> 
+                                    <a style="text-decoration: none;" href="/forum/tag/<%= tag.toLowerCase() %>">#<%= tag %></a>
+                                <% }) %>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </body>
+</html>

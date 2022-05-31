@@ -17,10 +17,7 @@ router.post("/", (req, res) => {
 
     post.save()
         .then((post) => {
-            res.status(200).send({
-                message: "Post created successfully",
-                post,
-            });
+            res.redirect(`/forum/d/${post.id}`);
         })
         .catch((error) => {
             res.status(500).send({

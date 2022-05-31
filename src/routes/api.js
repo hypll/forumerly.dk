@@ -28,6 +28,28 @@ router.post("/", (req, res) => {
         });
 });
 
+router.get("/categories", (req, res) => {
+    let categories = [
+        {
+            id: 1,
+            name: "Generelle Ting",
+            description: "Del historier, idéer og mere!",
+            url: "generelle-ting",
+        },
+
+        {
+            id: 2,
+            name: "Udvikling",
+            description: "Udvikling af spil, kode og andet.",
+            url: "udvikling",
+        },
+    ];
+
+    res.status(200).send({
+        categories,
+    });
+});
+
 router.get("/@me", ensureAuth, async (req, res) => {
     User.findById(req.user.id)
         .then((user) => {

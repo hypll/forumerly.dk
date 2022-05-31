@@ -68,6 +68,43 @@
                     <p class="text-muted" style="font-size: 12px">
                         Her er de nyeste indlæg.
                     </p>
+
+                    <div class="row" id="newPosts">
+                        <% for (let post of posts) { %>
+                        <div class="col-md-4">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <%= post.title %>
+                                    </h5>
+                                    <p class="card-text text-muted">
+                                        <%= post.body %>
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <button
+                                                class="btn btn-sm btn-sort"
+                                                onclick="r('/forum/post/<%= post.id %>')"
+                                            >
+                                                Læs mere
+                                            </button>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p
+                                                class="text-muted"
+                                                style="font-size: 14px"
+                                            >
+                                                <%=
+                                                post.createdAt.toLocaleDateString()
+                                                %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
                 </div>
             </div>
         </div>

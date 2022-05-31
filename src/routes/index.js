@@ -1,17 +1,18 @@
 const router = require("express").Router();
 const Post = require("../database/models/Post");
 const fetch = require("node-fetch");
-
+const { tags } = require("../../config.json");
 const { ensureAuth, ensureGuest } = require("../middleware/requireAuth");
 
 router.get("/", (req, res) => {
     res.render("index");
 });
 
-router.get("/forum", (req, res) => {
+router.get("/forum", async (req, res) => {
     res.render("forum", {
         user: req.user,
         error: req.flash("error"),
+        posts: await Post.find({}).sort({ createdAt: -1 }),
     });
 });
 
@@ -29,6 +30,7 @@ router.get("/forum/new", ensureAuth, (req, res) => {
             res.render("new", {
                 user: req.user,
                 categories: data.categories,
+                tags,
             });
         });
 });

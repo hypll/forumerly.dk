@@ -11,7 +11,6 @@ router.post("/", (req, res) => {
         title,
         body,
         category,
-
         tags,
         user: req.user.id,
     });

@@ -30,34 +30,46 @@
         />
         <script src="./script.js" defer></script>
         <title>Forumerly</title>
-        <style type="text/css">
-            body {
-                background-color: #e7e7e7;
-            }
-
-            .center-to-screen {
-                position: fixed;
-                top: 0;
-                left: 0;
-                align-items: center;
-                justify-content: center;
-                display: flex;
-                width: 100vw;
-                height: 100vh;
-            }
-        </style>
     </head>
     <body>
-        <div class="center-to-screen">
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
+        <%- include("./components/Navbar.ejs") %> <%-
+        include("./components/loader.ejs") %>
+        <div class="container mt-5">
+            <% if (error.length > 0) { %>
+            <div class="alert alert-danger alert-remove fade-out" role="alert">
+                <%= error %>
+            </div>
+            <% } %>
+
+            <div class="container text-center mb-5">
+                <div class="row">
+                    <h1 class="text-dark fs-1">Forumerly</h1>
+                    <p class="text-muted" style="font-size: 13px">
+                        Velkommen til, du kan dele billeder, lave blog posts &
+                        meget mere.
+                    </p>
+                </div>
+            </div>
+
+            <div class="container">
+                <div>
+                    <button
+                        class="btn btn-sm btn-sort"
+                        onclick="r('/forum/new')"
+                    >
+                        Opret nyt indlæg
+                    </button>
+                </div>
+
+                <div class="row mt-2 mb-5" id="kategorier"></div>
+
+                <div class="row mb-2" id="posts">
+                    <h1 class="text-dark fs-5">Nye indlæg</h1>
+                    <p class="text-muted" style="font-size: 12px">
+                        Her er de nyeste indlæg.
+                    </p>
+                </div>
             </div>
         </div>
-
-        <script>
-            window.addEventListener("load", () => {
-                window.location.href = "/forum";
-            });
-        </script>
     </body>
 </html>

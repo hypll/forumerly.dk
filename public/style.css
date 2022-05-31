@@ -81,6 +81,18 @@ body {
     font-size: 0.8rem;
 }
 
+.btn-danger-outline {
+    border-color: #dc3545;
+    color: #dc3545;
+    border-radius: 7px;
+    font-size: 0.8rem;
+}
+
+.btn-danger-outline:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
 .kategori {
     cursor: pointer;
 }

@@ -4,6 +4,8 @@ function r(url) {
 
 if (window.location.pathname === "/forum") {
     document.getElementById("home").classList.add("active");
+} else if (window.location.pathname === "/forum/new") {
+    document.getElementById("new").classList.add("active");
 }
 
 setTimeout(function () {
@@ -31,7 +33,7 @@ fetch("http://localhost:8080/api/categories", {
                 ${kategori.description}
              </p>
             </div>
-            </div>
+          </div>
         </div>
     `;
         });

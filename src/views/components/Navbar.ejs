@@ -29,10 +29,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav">
-                <a href="#" class="nav-item nav-link" id="home">Hjem</a>
-                <a href="#" class="nav-item nav-link">Alle inlæg </a>
+                <a href="/" class="nav-item nav-link" id="home">Hjem</a>
+                <a href="/forum/all" class="nav-item nav-link">Alle inlæg </a>
                 <% if (user) { %>
-                <a href="#" class="nav-item nav-link">Min profil</a>
+                <a href="/forum/new" class="nav-item nav-link" id="new"
+                    >Nyt inlæg</a
+                >
                 <% } %>
             </div>
             <div class="navbar-nav ms-auto">

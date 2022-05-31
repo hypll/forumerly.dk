@@ -5,11 +5,14 @@ const Post = require("../database/models/Post");
 const { ensureAuth, ensureGuest } = require("../middleware/requireAuth");
 
 router.post("/", (req, res) => {
-    const { title, body } = req.body;
+    const { title, body, category, tags } = req.body;
 
     const post = new Post({
         title,
         body,
+        category,
+
+        tags,
         user: req.user.id,
     });
 

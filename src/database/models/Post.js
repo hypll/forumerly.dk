@@ -4,6 +4,7 @@ const PostSchema = new mongoose.Schema({
     title: { type: String, required: [true, "Title is required"] },
     body: { type: String, required: [true, "Body is required"] },
     category: { type: String, required: [true, "Category is required"] },
+    tags: { type: String, required: [true, "Tags is required"] },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",

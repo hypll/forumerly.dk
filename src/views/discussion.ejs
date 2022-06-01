@@ -36,34 +36,137 @@
         include("./components/loader.ejs") %>
 
         <div class="container mt-5">
-            <div class="row">
+            <% if (success.length > 0) { %>
+            <div class="alert alert-success alert-remove fade-out" role="alert">
+                <%= success %>
+            </div>
+            <% } %>
+            <div class="row mb-5">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h1 class="card-title fs-4">
-                                <%= post.title %>
-                            </h1>
-                             <a style="text-decoration: none;" href="/forum/<%= post.category.toLowerCase() %>">I <%= post.category %></a>
+                            <h1 class="card-title fs-4"><%= post.title %></h1>
+                            <a
+                                style="text-decoration: none"
+                                href="/forum/<%= post.category.toLowerCase() %>"
+                                >I <%= post.category %></a
+                            >
                         </div>
                         <div class="card-body">
-                            <p class="card-text text-muted">
-                                <%= post.body %>
-                            </p>
+                            <p class="card-text text-muted"><%= post.body %></p>
                         </div>
                         <div class="card-footer">
-                            <small class="text-muted">
-                                <%= post.createdAt.toLocaleDateString() %> - <i class="fa-solid fa-eye"></i> <%= post.views  %> 
-                            </small>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">
-                                <% post.tags.map((tag) => { %> 
-                                    <a style="text-decoration: none;" href="/forum/tag/<%= tag.toLowerCase() %>">#<%= tag %></a>
-                                <% }) %>
-                            </small>
+                            <div class="mb-1 mt-1">
+                                <small class="text-muted">
+                                    <%= post.createdAt.toLocaleDateString() %> -
+                                    <i class="fa-solid fa-eye"></i> <%=
+                                    post.views %>
+                                </small>
+                            </div>
+                            <div>
+                                <small class="text-muted">
+                                    <% post.tags.map((tag) => { %>
+                                    <a
+                                        style="text-decoration: none"
+                                        href="/forum/tag/<%= tag.toLowerCase() %>"
+                                        >#<%= tag %></a
+                                    >
+                                    <% }) %>
+                                </small>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="fs-5">Kommentarer</h1>
+                    <% if (comments.length === 0) { %>
+                    <p class="text-muted mb-5">
+                        <i class="fa-solid fa-comment-dots"></i> Der er endnu
+                        ingen kommentarer.
+                    </p>
+                    <% } %> <% comments.map((comment) => { %>
+                    <div class="card mb-2">
+                        <div class="card-group">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <a href="/forum/u/<%= comment.author[0] %>"
+                                        >@<%= comment.author[1] %>
+                                    </a>
+                                    - <%= comment.content %>
+                                </p>
+                            </div>
+                            <div style="align-items: center">
+                                <div class="mb-1 mt-1">
+                                    <% if (user) { %> <% if (comment.author[0]
+                                    === user.id) { %>
+                                    <small class="text-muted">
+                                        <form
+                                            action="/api/comment/<%= comment._id %>?_method=DELETE"
+                                            method="post"
+                                        >
+                                            <button
+                                                type="submit"
+                                                style="
+                                                    border: none;
+                                                    background: none;
+                                                "
+                                                class="text-danger"
+                                            >
+                                                <i
+                                                    class="
+                                                        fa-solid fa-trash-alt
+                                                    "
+                                                ></i>
+                                            </button>
+                                        </form>
+                                    </small>
+                                    <% } %> <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+                    <hr size="10" />
+                    <% if (user) { %>
+                    <form class="mb-4" action="/api/comment" method="post">
+                        <h1 class="fs-5">Kommentar</h1>
+                        <div class="form-group mb-2">
+                            <label
+                                for="comment"
+                                class="text-muted mb-2"
+                                style="font-size: 0.9rem"
+                            >
+                                Byd ind i denne diskussionen, med en
+                                kommentar!</label
+                            >
+                            <input
+                                class="form-control"
+                                id="comment"
+                                name="comment"
+                                rows="3"
+                                onkeyup="validation(this)"
+                                placeholder="Skriv din kommentar her..."
+                            />
+                        </div>
+                        <input
+                            type="hidden"
+                            name="postId"
+                            value="<%= post._id %>"
+                        />
+                        <button
+                            type="submit"
+                            id="commentSubmit"
+                            class="btn btn-sort"
+                        >
+                            Opret kommentar
+                        </button>
+                    </form>
+                    <% } %>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

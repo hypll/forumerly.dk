@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Post = require("../database/models/Post");
+const Comment = require("../database/models/Comment");
 const fetch = require("node-fetch");
 const { tags } = require("../../config.json");
 const { ensureAuth, ensureGuest } = require("../middleware/requireAuth");
@@ -17,13 +18,17 @@ router.get("/forum", async (req, res) => {
 });
 
 router.get("/forum/d/:id", async (req, res) => {
-    Post.findOne({ _id: req.params.id }, (err, discussion) => {
+    Post.findById({ _id: req.params.id }, async (err, discussion) => {
         if (discussion === null || !discussion) {
             res.redirect("/");
         } else {
             res.render("discussion", {
                 user: req.user,
+                comments: await Comment.find({ post: discussion.id }).sort({
+                    createdAt: -1,
+                }),
                 post: discussion,
+                success: req.flash("success"),
             });
         }
     });
@@ -53,6 +58,10 @@ router.get("/forum/:category", (req, res) => {
         message: "Category not found",
         category: req.params.category,
     });
+});
+
+router.get("/login", (req, res) => {
+    res.render("login");
 });
 
 router.get("*", (req, res) => {

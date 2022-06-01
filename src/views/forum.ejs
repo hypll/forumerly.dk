@@ -70,9 +70,16 @@
                     </p>
 
                     <div class="row" id="newPosts">
-                        <% for (let post of posts) { %>
+                        <% if (posts.length === 0) { %>
+                        <div class="col-12">
+                            <div class="alert alert-dark alert-sm" role="alert">
+                                <i class="fa-solid fa-circle-info"></i> Der er
+                                ingen nye indlæg.
+                            </div>
+                        </div>
+                        <% } %> <% for (let post of posts) { %>
                         <div class="col-md-4">
-                            <div class="card mb-3">
+                            <div class="card mb-3" post="<%= post.title %>">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         <%= post.title %>

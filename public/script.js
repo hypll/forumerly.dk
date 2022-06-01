@@ -38,3 +38,11 @@ fetch("http://localhost:8080/api/categories", {
     `;
         });
     });
+
+// function validdation(this) {
+//     if (this.value === "") {
+//        document.getElementById("commentSubmit").disabled = true;
+//     } else {
+//         document.getElementById("commentSubmit").disabled = false;
+//     }
+// }

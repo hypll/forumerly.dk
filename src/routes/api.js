@@ -2,6 +2,7 @@ require("dotenv").config();
 const router = require("express").Router();
 const User = require("../database/models/User");
 const Post = require("../database/models/Post");
+const Comment = require("../database/models/Comment");
 const { ensureAuth, ensureGuest } = require("../middleware/requireAuth");
 
 router.post("/", (req, res) => {
@@ -22,6 +23,50 @@ router.post("/", (req, res) => {
         .catch((error) => {
             res.status(500).send({
                 message: "Error creating post",
+                error,
+            });
+        });
+});
+
+router.post("/comment", ensureAuth, (req, res) => {
+    const { comment, postId } = req.body;
+
+    const newComment = new Comment({
+        content: comment,
+        author: [req.user.id, req.user.name, req.user.avatar],
+        post: postId,
+    });
+
+    newComment.save().then((comment) => {
+        req.flash("success", "Kommentaren blev tilføjet!");
+        res.redirect(`/forum/d/${postId}`);
+    });
+});
+
+router.delete("/comment/:id", ensureAuth, (req, res) => {
+    Comment.findById(req.params.id)
+        .then((comment) => {
+            if (comment.author[0] === req.user.id) {
+                Comment.findByIdAndDelete(req.params.id)
+                    .then((comment) => {
+                        req.flash("success", "Kommentaren blev slettet!");
+                        res.redirect(`/forum/d/${comment.post}`);
+                    })
+                    .catch((error) => {
+                        res.status(500).send({
+                            message: "Error deleting comment",
+                            error,
+                        });
+                    });
+            } else {
+                res.status(401).send({
+                    message: "You are not authorized to delete this comment",
+                });
+            }
+        })
+        .catch((error) => {
+            res.status(500).send({
+                message: "Error finding comment",
                 error,
             });
         });

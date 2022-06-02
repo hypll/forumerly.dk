@@ -20,7 +20,7 @@
             crossorigin="anonymous"
         ></script>
         <!-- Other (eg: styles, scripts) -->
-        <link rel="stylesheet" href="./style.css" />
+        <link rel="stylesheet" href="../../style.css" />
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -28,29 +28,113 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
         />
-        <script src="./script.js" defer></script>
+        <script src="../../script.js" defer></script>
         <title>Forumerly - <%= user.name %></title>
     </head>
     <body>
-        <div class="container">
-            This is page is under development.
+        <%- include("./components/Navbar.ejs") %> <%-
+        include("./components/loader.ejs") %>
 
+        <div class="container mt-5">
             <div class="row">
-                <div class="col-md-12">
-                    <h1><%= user.name %></h1>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h2>Posts</h2>
-
-                            <% posts.map((post) => { %>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <h3><%= post.title %></h3>
-                                    <p><%= post.body %></p>
+                                <div class="col-md-4">
+                                    <img
+                                        src="<%= userp.avatar %>"
+                                        alt="profile picture"
+                                        class="img-fluid rounded-circle"
+                                    />
+                                </div>
+                                <div class="col-md-8">
+                                    <h5 class="card-title fs-5 mb-2">
+                                        <%= userp.name %>
+                                    </h5>
+                                    <p
+                                        class="card-text"
+                                        style="font-size: 11px"
+                                    >
+                                        <% if (!userp.bio) { %> <%= userp.name
+                                        %> har ikke skrevet en bio. <% } else {
+                                        %> <%= user.bio %> <% } %>
+                                    </p>
                                 </div>
                             </div>
-                            <% }) %>
+                        </div>
+                    </div>
+                    <div class="col-md-8 mt-2 mb-2">
+                        <% if (user) { %> <% if (userp.id === user.id) { %>
+                        <a
+                            href="/forum/u/<%= userp.id %>/edit"
+                            class="btn btn-sort"
+                        >
+                            <i class="fas fa-edit"></i>
+                            Rediger profil
+                        </a>
+
+                        <% } %> <% } %>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5 class="card-title">Posts</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <% if (posts.length === 0) { %>
+                                    <div class="col-12">
+                                        <div
+                                            class="alert alert-dark alert-sm"
+                                            role="alert"
+                                        >
+                                            <i
+                                                class="fa-solid fa-circle-info"
+                                            ></i>
+                                            <%= userp.name %> har ikke lavet
+                                            nogen posts.
+                                        </div>
+                                    </div>
+                                    <% } %> <% posts.forEach(post => { %>
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h5 class="card-title">
+                                                        <%= post.title %>
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p class="card-text">
+                                                        <%= post.body %>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p class="card-text">
+                                                        <small
+                                                            class="text-muted"
+                                                        >
+                                                            <%=
+                                                            post.createdAt.toLocaleString()
+                                                            %> %>
+                                                        </small>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% }) %>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Path /**/ -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Del billeder, blogs & meget andet" />
+        <meta name="author" content="Hypll" />
+        <!-- Bootstrap -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"
+            defer
+        ></script>
+        <!-- Other (eg: styles, scripts) -->
+        <link rel="stylesheet" href="../../../style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <script src="../../../script.js" defer></script>
+        <title>Forumerly - <%= user.name %></title>
+        <script>
+            function validateName(e) {
+                const name = document.getElementById("name");
+                const submit = document.getElementById("submit");
+
+                if (name.value.length < 3) {
+                    submit.disabled = true;
+                } else {
+                    submit.disabled = false;
+                }
+            }
+
+            function validateAvatar() {
+                const avatar = document.getElementById("avatar");
+                const submit = document.getElementById("submit");
+
+                if (avatar.value.length < 7) {
+                    submit.disabled = true;
+                } else if (avatar.value.includes("http")) {
+                    submit.disabled = false;
+                } else if (avatar.value.includes("https")) {
+                    submit.disabled = false;
+                } else {
+                    submit.disabled = false;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <%- include("./components/Navbar.ejs") %> <%-
+        include("./components/loader.ejs") %>
+
+        <div class="container mt-5">
+            <% if (success.length > 0) { %>
+            <div class="alert alert-success alert-remove fade-out" role="alert">
+                <%= success %>
+            </div>
+            <% } %> <% if (error.length > 0) { %>
+            <div class="alert alert-danger alert-remove fade-out" role="alert">
+                <%= error %>
+            </div>
+            <% } %>
+            <form action="/api/@me" method="POST">
+                <div class="form-group mb-2">
+                    <label for="name">Navn</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        name="name"
+                        value="<%= user.name %>"
+                        onkeyup="validateName()"
+                        required=""
+                    />
+                </div>
+                <div class="form-group mb-2">
+                    <label for="email">Email</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="bottom"
+                        title="Du kan ikke ændre din email."
+                        value="<%= user.email %>"
+                        style="cursor: not-allowed"
+                        disabled
+                    />
+                </div>
+                <div class="form-group mb-2">
+                    <label for="bio">Bio</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="bio"
+                        name="bio"
+                        placeholder="Skriv din bio her"
+                        maxlength="50"
+                        value="<%= user.bio %>"
+                    />
+                </div>
+
+                <div class="form-group mb-2">
+                    <label for="avatar">Avatar</label><br />
+
+                    <img
+                        src="<%= user.avatar %>"
+                        class="img-fluid rounded-circle mb-4 mt-4"
+                        alt="avatar"
+                        style="width: 3rem"
+                    />
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="avatar"
+                        name="avatar"
+                        placeholder="Skriv din avatar url her"
+                        onkeyup="validateAvatar()"
+                        value="<%= user.avatar %>"
+                    />
+                </div>
+
+                <button type="submit" class="btn btn-green" id="submit">
+                    Opdater profil
+                </button>
+            </form>
+        </div>
+    </body>
+</html>

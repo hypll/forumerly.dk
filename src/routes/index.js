@@ -42,12 +42,29 @@ router.get("/forum/u/:id", async (req, res) => {
         } else {
             res.render("user", {
                 user: req.user,
-                user: user,
-                posts: await Post.find({ user: req.user.id }).sort({
+                userp: user,
+                posts: await Post.find({ user: user.id }).sort({
                     createdAt: -1,
                 }),
 
                 success: req.flash("success"),
+            });
+        }
+    });
+});
+
+router.get("/forum/u/:id/edit", ensureAuth, async (req, res) => {
+    User.findById({ _id: req.params.id }, async (err, user) => {
+        if (user === null || !user) {
+            res.redirect("/");
+        } else if (req.user.id != user.id) {
+            res.redirect("/");
+        } else {
+            res.render("edit", {
+                user: req.user,
+                userp: user,
+                success: req.flash("success"),
+                error: req.flash("error"),
             });
         }
     });

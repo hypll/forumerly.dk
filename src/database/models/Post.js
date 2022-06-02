@@ -3,18 +3,21 @@ const marked = require("marked");
 
 const PostSchema = new mongoose.Schema(
     {
-        title: { type: String, required: [true, "Title is required"] },
-        body: { type: String, required: [true, "Body is required"] },
-        category: { type: String, required: [true, "Category is required"] },
+        title: { type: String, required: [true, "Titel er påkrævet"] },
+        body: {
+            type: String,
+            required: [true, "En beskrivelse af dit indlæg er påkrævet"],
+        },
+        category: { type: String, required: [true, "Kategori er påkrævet"] },
         views: { type: Number, default: 0 },
         tags: {
             type: [String],
-            required: [true, "At least one tag is required"],
+            required: [true, "Der kræves mindst ét tag"],
         },
         user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
-            required: [true, "A user for posts are required"],
+            required: [true, "Der kræves en bruger til indlæg"],
         },
         sanitizedHtml: {
             type: String,

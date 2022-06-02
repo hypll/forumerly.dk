@@ -48,7 +48,7 @@ body {
     background-color: var(--main-color);
     color: #fff;
     text-decoration: none;
-    margin-right: 3rem;
+    margin-right: 7rem;
     border-radius: 7px;
 }
 
@@ -79,6 +79,17 @@ body {
     color: white;
     border-radius: 7px;
     font-size: 0.8rem;
+}
+
+.btn-green {
+    background-color: #188654;
+    color: white;
+    border-radius: 7px;
+    font-size: 0.8rem;
+}
+
+.btn-green:hover {
+    border-color: black;
 }
 
 .btn-danger-outline {

@@ -1,3 +1,5 @@
+const User = require("../database/models/User");
+
 module.exports = {
     ensureAuth: function (req, res, next) {
         if (req.isAuthenticated()) {
@@ -6,6 +8,8 @@ module.exports = {
             res.redirect("/auth/login");
         }
     },
+
+    ensurePermission: function (req, res, next) {},
 
     ensureGuest: function (req, res, next) {
         if (!req.isAuthenticated()) {

@@ -17,6 +17,12 @@ const UserSchema = new mongoose.Schema(
             required: true,
         },
 
+        bio: {
+            type: String,
+            minlength: [5, "Bio skal være mindst 5 tegn"],
+            maxlength: [50, "Bio må ikke være mere end 50 tegn"],
+        },
+
         avatar: {
             type: String,
             required: true,

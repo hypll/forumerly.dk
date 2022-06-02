@@ -114,6 +114,26 @@ router.get("/@me", ensureAuth, async (req, res) => {
         });
 });
 
+router.post("/@me", ensureAuth, async (req, res) => {
+    const { name, bio, avatar } = req.body;
+
+    const user = await User.findById(req.user.id);
+
+    user.name = name;
+    user.bio = bio;
+    user.avatar = avatar;
+
+    user.save()
+        .then((user) => {
+            req.flash("success", "Dine oplysninger blev opdateret!");
+            res.redirect(`/forum/u/${user.id}/edit`);
+        })
+        .catch((error) => {
+            req.flash("error", "Du skal udfylde alle felter!");
+            res.redirect(`/forum/u/${user.id}/edit`);
+        });
+});
+
 router.get("/@me/posts", ensureAuth, async (req, res) => {
     Post.find({ user: req.user.id })
         .then((posts) => {

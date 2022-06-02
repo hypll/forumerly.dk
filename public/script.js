@@ -12,7 +12,7 @@ setTimeout(function () {
     document.querySelector(".alert-remove").remove();
 }, 5000);
 
-fetch("http://localhost:8080/api/categories", {
+fetch("/api/categories", {
     method: "GET",
 })
     .then(function (response) {

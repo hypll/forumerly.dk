@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Post = require("../database/models/Post");
 const Comment = require("../database/models/Comment");
+const User = require("../database/models/User");
 const fetch = require("node-fetch");
 const { tags } = require("../../config.json");
 const { ensureAuth, ensureGuest } = require("../middleware/requireAuth");
@@ -28,6 +29,24 @@ router.get("/forum/d/:id", async (req, res) => {
                     createdAt: -1,
                 }),
                 post: discussion,
+                success: req.flash("success"),
+            });
+        }
+    });
+});
+
+router.get("/forum/u/:id", async (req, res) => {
+    User.findById({ _id: req.params.id }, async (err, user) => {
+        if (user === null || !user) {
+            res.redirect("/");
+        } else {
+            res.render("user", {
+                user: req.user,
+                user: user,
+                posts: await Post.find({ user: req.user.id }).sort({
+                    createdAt: -1,
+                }),
+
                 success: req.flash("success"),
             });
         }

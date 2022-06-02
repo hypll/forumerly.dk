@@ -37,10 +37,15 @@ router.post("/comment", ensureAuth, (req, res) => {
         post: postId,
     });
 
-    newComment.save().then((comment) => {
-        req.flash("success", "Kommentaren blev tilføjet!");
-        res.redirect(`/forum/d/${postId}`);
-    });
+    newComment
+        .save()
+        .then((comment) => {
+            req.flash("success", "Kommentaren blev tilføjet!");
+            res.redirect(`/forum/d/${postId}`);
+        })
+        .catch((error) => {
+            res.status(500).redirect(`/forum/d/${postId}`);
+        });
 });
 
 router.delete("/comment/:id", ensureAuth, (req, res) => {

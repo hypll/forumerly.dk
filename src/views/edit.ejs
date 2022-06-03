@@ -138,6 +138,47 @@
                     Opdater profil
                 </button>
             </form>
+
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="mt-5 fs-3 mb-3">Dine posts</h2>
+                </div>
+                <hr />
+                <% for (let post of posts) { %>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div
+                        class="card card-hover mb-4"
+                        onclick="r('/forum/d/<%= post.id %>/edit')"
+                    >
+                        <div class="card-body">
+                            <h5 class="card-title"><%= post.title %></h5>
+                            <p class="card-text"><%= post.description %></p>
+
+                            <div class="mb-2">
+                                <button
+                                    class="btn btn-green btn-sm"
+                                    onclick="r('/forum/d/<%= post.id %>/edit')"
+                                >
+                                    <i class="fa fa-edit"></i> Rediger
+                                </button>
+
+                                <button
+                                    class="btn btn-sort btn-sm"
+                                    onclick="r('/forum/d/<%= post.id %>')"
+                                >
+                                    <i class="fa fa-eye"></i> Se post
+                                </button>
+                            </div>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <%= post.createdAt.toLocaleDateString() %>
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+            </div>
         </div>
     </body>
 </html>

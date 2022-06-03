@@ -3,13 +3,15 @@ const router = require("express").Router();
 const User = require("../database/models/User");
 const Post = require("../database/models/Post");
 const Comment = require("../database/models/Comment");
+const fetch = require("node-fetch");
 const { ensureAuth, ensureGuest } = require("../middleware/requireAuth");
 
 router.post("/", (req, res) => {
-    const { title, body, category, tags } = req.body;
+    const { title, description, body, category, tags } = req.body;
 
     const post = new Post({
         title,
+        description,
         body,
         category,
         tags,
@@ -25,6 +27,27 @@ router.post("/", (req, res) => {
                 message: "Error creating post",
                 error,
             });
+        });
+});
+
+router.put("/", ensureAuth, (req, res) => {
+    Post.findOneAndUpdate(
+        req.body.postId,
+        {
+            title: req.body.title,
+            description: req.body.description,
+            body: req.body.body,
+            tags: req.body.tags,
+        },
+        { new: true }
+    )
+        .then((post) => {
+            req.flash("success", "Dit post blev opdateret!");
+            res.redirect(`/forum/d/${post.id}/edit`);
+        })
+        .catch((error) => {
+            req.flash("error", "Der skete en fejl, prøv igen!");
+            res.redirect(`/forum/d/${req.body.postId}/edit`);
         });
 });
 

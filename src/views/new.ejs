@@ -53,23 +53,34 @@
                         class="form-control"
                         required
                     />
-                    <div class="valid-feedback">Looks good!</div>
+                    <div class="valid-feedback">Ser godt ud!</div>
                 </div>
                 <div class="mb-3">
-                    <label for="title" class="form-label">Beskrivelse</label>
+                    <label for="title" class="form-label">Kort beskrivelse</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="description"
+                        placeholder="Skriv en kort beskrivelse af dit indlæg"
+                        required
+                    ></input>
+                </div>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Lang beskrivelse</label>
                     <textarea
                         class="form-control"
                         name="body"
                         placeholder="Skriv dit inlæg her, du kan bruge markdown/html"
+                        required
                     ></textarea>
                 </div>
 
                 <div class="mb-3">
                     <label for="title" class="form-label">Kategorier</label>
-                    <select class="form-control" name="category">
+                    <select class="form-control" name="category" required>
                         <option value="">Vælg en kategori</option>
                         <% categories.forEach(category => { %>
-                        <option value="<%- category.name %>">
+                        <option value="<%- category.name %>" required>
                             <%- category.name %>
                         </option>
                         <% }) %>
@@ -85,7 +96,7 @@
                 <div class="mb-3">
                     <label for="title" class="form-label">Tags</label>
 
-                    <select class="form-control" name="tags" multiple>
+                    <select class="form-control" name="tags" multiple required>
                         <option value="">Vælg et tag</option>
                         <% tags.forEach(tag => { %>
                         <option value="<%- tag %>"><%- tag %></option>

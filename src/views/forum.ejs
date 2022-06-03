@@ -53,12 +53,22 @@
 
             <div class="container">
                 <div>
+                    <% if (user) { %>
                     <button
                         class="btn btn-sm btn-sort"
                         onclick="r('/forum/new')"
                     >
                         Opret nyt indlæg
                     </button>
+                    <% } else { %>
+                    <button
+                        class="btn btn-sm btn-sort"
+                        onclick="r('/login')"
+                        disabled
+                    >
+                        Opret nyt indlæg
+                    </button>
+                    <% } %>
                 </div>
 
                 <div class="row mt-2 mb-5" id="kategorier"></div>
@@ -85,7 +95,7 @@
                                         <%= post.title %>
                                     </h5>
                                     <p class="card-text text-muted">
-                                        <%= post.body %>
+                                        <%= post.description %>
                                     </p>
                                     <div class="row">
                                         <div class="col-md-6">

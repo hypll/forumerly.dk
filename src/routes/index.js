@@ -35,6 +35,33 @@ router.get("/forum/d/:id", async (req, res) => {
     });
 });
 
+router.get("/forum/d/:id/edit", ensureAuth, (req, res) => {
+    Post.findById({ _id: req.params.id }, (err, discussion) => {
+        if (discussion === null || !discussion) {
+            res.redirect("/");
+        } else if (req.user.id != discussion.user) {
+            res.redirect("/");
+        } else {
+            fetch(process.env.HOST + "/api/categories", {
+                method: "GET",
+            })
+                .then((response) => {
+                    response.json();
+                })
+                .then((data) => {
+                    res.render("editpost", {
+                        user: req.user,
+                        post: discussion,
+                        // categories: data.categories,
+                        tags: tags,
+                        success: req.flash("success"),
+                        error: req.flash("error"),
+                    });
+                });
+        }
+    });
+});
+
 router.get("/forum/u/:id", async (req, res) => {
     User.findById({ _id: req.params.id }, async (err, user) => {
         if (user === null || !user) {
@@ -65,6 +92,9 @@ router.get("/forum/u/:id/edit", ensureAuth, async (req, res) => {
                 userp: user,
                 success: req.flash("success"),
                 error: req.flash("error"),
+                posts: await Post.find({ user: req.user.id }).sort({
+                    createdAt: -1,
+                }),
             });
         }
     });

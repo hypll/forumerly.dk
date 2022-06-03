@@ -4,6 +4,12 @@ const marked = require("marked");
 const PostSchema = new mongoose.Schema(
     {
         title: { type: String, required: [true, "Titel er påkrævet"] },
+        description: {
+            type: String,
+            required: [true, "Beskrivelse er påkrævet"],
+            maxlength: [80, "Beskrivelsen må ikke være længere end 80 tegn"],
+            minlength: [10, "Beskrivelsen må ikke være kortere end 10 tegn"],
+        },
         body: {
             type: String,
             required: [true, "En beskrivelse af dit indlæg er påkrævet"],

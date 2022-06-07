@@ -31,7 +31,7 @@ router.post("/", (req, res) => {
 });
 
 router.put("/", ensureAuth, (req, res) => {
-    Post.findOneAndUpdate(
+    Post.findByIdAndUpdate(
         req.body.postId,
         {
             title: req.body.title,

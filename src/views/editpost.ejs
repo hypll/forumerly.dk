@@ -125,6 +125,20 @@
                                     Opdater post
                                 </button>
                             </form>
+                            <hr />
+                            <form action="/api?_method=DELETE" method="post">
+                                <input
+                                    type="hidden"
+                                    name="postId"
+                                    value="<%= post.id %>"
+                                />
+                                <button
+                                    type="submit"
+                                    class="btn btn-danger-outline"
+                                >
+                                    <i class="fa fa-warning"></i> Slet post
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>

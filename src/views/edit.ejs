@@ -144,7 +144,13 @@
                     <h2 class="mt-5 fs-3 mb-3">Dine posts</h2>
                 </div>
                 <hr />
-                <% for (let post of posts) { %>
+                <% if (posts.length == 0) { %>
+                <div class="col-12">
+                    <p class="text-left text-muted">
+                        Du har endnu ikke oprettet nogen posts.
+                    </p>
+                </div>
+                <% } %> <% for (let post of posts) { %>
                 <div class="col-12 col-md-6 col-lg-4">
                     <div
                         class="card card-hover mb-4"

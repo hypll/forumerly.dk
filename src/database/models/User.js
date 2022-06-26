@@ -23,6 +23,11 @@ const UserSchema = new mongoose.Schema(
             maxlength: [50, "Bio må ikke være mere end 50 tegn"],
         },
 
+        darkmode: {
+            type: String,
+            default: "false",
+        },
+
         avatar: {
             type: String,
             required: true,

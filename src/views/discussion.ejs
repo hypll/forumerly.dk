@@ -91,12 +91,23 @@
                     <div class="card mb-2">
                         <div class="card-group">
                             <div class="card-body">
-                                <p class="card-text">
-                                    <a href="/forum/u/<%= comment.author[0] %>"
-                                        >@<%= comment.author[1] %>
-                                    </a>
-                                    - <%= comment.content %>
-                                </p>
+                                <span>
+                                    <p class="card-text">
+                                        <a
+                                            href="/forum/u/<%= comment.author[0] %>"
+                                            >@<%= comment.author[1] %>
+                                        </a>
+                                        - <%= comment.content %>
+                                    </p>
+
+                                    <!-- <button
+                                        class="btn btn-primary"
+                                        type="button"
+                                        disabled
+                                    >
+                                        Disabled button
+                                    </button> -->
+                                </span>
                             </div>
                             <div style="align-items: center">
                                 <div class="mb-1 mt-1">
@@ -116,9 +127,7 @@
                                                 class="text-danger"
                                             >
                                                 <i
-                                                    class="
-                                                        fa-solid fa-trash-alt
-                                                    "
+                                                    class="fa-solid fa-trash-alt"
                                                 ></i>
                                             </button>
                                         </form>

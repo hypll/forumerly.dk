@@ -101,7 +101,11 @@
                                         </div>
                                     </div>
                                     <% } %> <% posts.forEach(post => { %>
-                                    <div class="card mb-3">
+                                    <div
+                                        class="card mb-3"
+                                        style="cursor: pointer"
+                                        onclick="r('/forum/d/<%= post.id %>')"
+                                    >
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-12">

@@ -2,6 +2,13 @@ function r(url) {
     window.location.href = url;
 }
 
+const popoverTriggerList = document.querySelectorAll(
+    '[data-bs-toggle="popover"]'
+);
+const popoverList = [...popoverTriggerList].map(
+    (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
+);
+
 if (window.location.pathname === "/forum") {
     document.getElementById("home").classList.add("active");
 } else if (window.location.pathname === "/forum/new") {

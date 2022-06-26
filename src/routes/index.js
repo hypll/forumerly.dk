@@ -18,6 +18,14 @@ router.get("/forum", async (req, res) => {
     });
 });
 
+router.get("/forum/settings", ensureAuth, async (req, res) => {
+    res.render("settings", {
+        user: req.user,
+        error: req.flash("error"),
+        success: req.flash("success"),
+    });
+});
+
 router.get("/forum/d/:id", async (req, res) => {
     Post.findById({ _id: req.params.id }, async (err, discussion) => {
         if (discussion === null || !discussion) {

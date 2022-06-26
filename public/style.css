@@ -11,6 +11,11 @@ body {
     background-color: #eee;
 }
 
+.dark-mode {
+    background-color: var(--dark-color);
+    color: var(--main-color);
+}
+
 .navbar {
     background-color: var(--main-color);
     color: #fff;

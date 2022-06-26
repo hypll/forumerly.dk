@@ -71,6 +71,18 @@ router.post("/comment", ensureAuth, (req, res) => {
         });
 });
 
+router.delete("/delete/post", ensureAuth, (req, res) => {
+    Post.findByIdAndDelete(req.body.postId)
+        .then((post) => {
+            req.flash("success", "Dit post blev slettet!");
+            res.redirect(`/forum/u/${req.user.id}/edit`);
+        })
+        .catch((error) => {
+            req.flash("error", "Der skete en fejl, prøv igen!");
+            res.redirect(`/forum/d/${req.body.postId}`);
+        });
+});
+
 router.delete("/comment/:id", ensureAuth, (req, res) => {
     Comment.findById(req.params.id)
         .then((comment) => {
@@ -159,6 +171,24 @@ router.post("/@me", ensureAuth, async (req, res) => {
         .catch((error) => {
             req.flash("error", "Du skal udfylde alle felter!");
             res.redirect(`/forum/u/${user.id}/edit`);
+        });
+});
+
+router.post("/@me/darkmode", async (req, res) => {
+    const { darkmode } = req.body;
+
+    const user = await User.findById(req.user.id);
+
+    user.darkmode = darkmode;
+
+    user.save()
+        .then((user) => {
+            req.flash("success", "Dit theme blev ændret!");
+            res.redirect(`/forum/settings`);
+        })
+        .catch((error) => {
+            req.flash("error", "Du skal udfylde alle felter!");
+            res.redirect(`/forum/settings`);
         });
 });
 

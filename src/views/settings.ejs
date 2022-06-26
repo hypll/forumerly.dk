@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Path /**/ -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Del billeder, blogs & meget andet" />
+        <meta name="author" content="Hypll" />
+        <!-- Bootstrap -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"
+        ></script>
+        <!-- Other (eg: styles, scripts) -->
+        <link rel="stylesheet" href="../style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <script src="../script.js" defer></script>
+        <title>Forumerly - Settings</title>
+    </head>
+
+    <% if (user.darkmode === "true")  {%> 
+    <body class="dark-mode">
+    <% } else { %>
+    <body>
+    <% } %>
+
+    
+        <%- include("./components/Navbar.ejs") %> <%-
+        include("./components/loader.ejs") %>
+        <div class="container mt-5">
+            <% if (error.length > 0) { %>
+            <div class="alert alert-danger alert-remove fade-out" role="alert">
+                <%= error %>
+            </div>
+            <% } %> <% if (success.length > 0) { %>
+            <div class="alert alert-success alert-remove fade-out" role="alert">
+                <%= success %>
+            </div>
+            <% } %>
+
+            <div>
+                <h1>Indstillinger</h1>
+                <hr />
+
+                <form class="row" action="/api/@me/darkmode" method="post">
+                    <div class="col-md-6">
+                        <div class="form-group mb-2">
+                            <label for="darkmode"
+                                ><i class="fa-solid fa-moon"></i>
+                                Darkmode</label
+                            >
+                            <select
+                                class="form-control"
+                                id="darkmode"
+                                name="darkmode"
+                            >
+                                <option value="true">Aktiv</option>
+                                <option value="false">Inaktiv</option>
+                            </select>
+                        </div>
+
+                        <input
+                            type="hidden"
+                            name="userId"
+                            value="<%= user.id %>"
+                        />
+                        <button type="submit" class="btn btn-green">
+                            Opdater theme
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -192,6 +192,16 @@ router.post("/@me/darkmode", async (req, res) => {
         });
 });
 
+router.delete("/@me/delete", (req, res) => {
+    User.findOneAndDelete({ _id: req.user._id }, (err, user) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect("/");
+        }
+    });
+});
+
 router.get("/@me/posts", ensureAuth, async (req, res) => {
     Post.find({ user: req.user.id })
         .then((posts) => {

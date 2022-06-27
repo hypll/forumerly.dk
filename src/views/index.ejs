@@ -47,7 +47,13 @@
             }
         </style>
     </head>
-    <body>
+    <% if (user) { %> 
+        <% if (user.darkmode === "true")  {%> 
+            <body class="dark-mode">
+            <% } else { %>
+            <body>
+            <% } %>
+        <% } %>
         <div class="center-to-screen">
             <div class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>

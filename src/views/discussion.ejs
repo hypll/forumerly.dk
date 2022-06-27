@@ -67,7 +67,9 @@
                                 <small class="text-muted">
                                     <%= post.createdAt.toLocaleDateString() %> -
                                     <i class="fa-solid fa-eye"></i> <%=
-                                    post.views %>
+                                    post.views %> - <i class="fa-solid fa-comment"></i> <%=
+                                    comments.length %> - <i class="fa-solid fa-user"></i> <a style="text-decoration: none;" href="/forum/u/<%= postAuthor.id %>"><%= postAuthor.name  %></a> -
+                             
                                 </small>
                             </div>
                             <div>
@@ -95,51 +97,33 @@
                         ingen kommentarer.
                     </p>
                     <% } %> <% comments.map((comment) => { %>
-                    <div class="card mb-2">
-                        <div class="card-group">
+                        <div class="card mb-4">
                             <div class="card-body">
-                                <span>
-                                    <p class="card-text">
-                                        <a
-                                            href="/forum/u/<%= comment.author[0] %>"
-                                            >@<%= comment.author[1] %>
-                                        </a>
-                                        - <%= comment.content %>
-                                    </p>
-                                </span>
-                            </div>
-                            <div style="align-items: center">
-                                <div class="mb-1 mt-1">
-                                    <% if (user) { %> <% if (comment.author[0]
-                                    === user.id) { %>
-                                    <small class="text-muted">
-                                        <form
-                                            action="/api/comment/<%= comment._id %>?_method=DELETE"
-                                            method="post"
-                                        >
-                                            <button
-                                                type="submit"
-                                                style="
-                                                    border: none;
-                                                    background: none;
-                                                "
-                                                class="text-danger"
-                                            >
-                                                <i
-                                                    class="fa-solid fa-trash-alt"
-                                                ></i>
-                                            </button>
-                                        </form>
-                                    </small>
-                                    <% } %> <% } %>
+                              <p><%= comment.content  %> </p>
+                  
+                              <div class="d-flex justify-content-between">
+                                <div class="d-flex flex-row align-items-center">
+                                  <img src="<%= comment.author[2] %>" alt="<%= comment.author[0]  %>" class="rounded-circle" width="25"
+                                    height="25" />
+                                  <a href="/forum/u/<%= comment.author[0] %>" class="small mb-0 ms-2">@<%= comment.author[1] %></a>
                                 </div>
+                                <% if (user) { %> <% if (comment.author[0]
+                                    === user.id) { %>
+                                <form class="d-flex flex-row align-items-center" action="/api/comment/<%= comment._id %>?_method=DELETE" method="post">
+                                  <button type="submit" style="border: none; background: none;" class="text-danger">
+                                    <i class="fa-solid fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                                <% } %> <% } %>
+                              </div>
                             </div>
-                        </div>
-                    </div>
+                          </div>
+            
                     <% }) %>
-                    <hr size="10" />
+                    
                     <% if (user) { %>
-                    <form class="mb-4" action="/api/comment" method="post">
+                    <form class="mb-4 container" action="/api/comment" method="post">
+                        <hr size="10" />
                         <h1 class="fs-5">Kommentar</h1>
                         <div class="form-group mb-2">
                             <label

@@ -28,14 +28,4 @@ router.get("/logout", (req, res) => {
     res.redirect("/");
 });
 
-router.get("/delete", (req, res) => {
-    User.findOneAndDelete({ _id: req.user._id }, (err, user) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.redirect("/");
-        }
-    });
-});
-
 module.exports = router;

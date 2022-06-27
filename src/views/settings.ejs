@@ -53,15 +53,15 @@
             <% } %>
 
             <div>
-                <h1>Indstillinger</h1>
+                <h1 class="dark-mode-title">Indstillinger</h1>
                 <hr />
 
                 <form class="row" action="/api/@me/darkmode" method="post">
                     <div class="col-md-6">
                         <div class="form-group mb-2">
-                            <label for="darkmode"
+                            <label for="darkmode" class="mb-2 dark-mode-medium"
                                 ><i class="fa-solid fa-moon"></i>
-                                Darkmode</label
+                                Mørktema</label
                             >
                             <select
                                 class="form-control"
@@ -89,6 +89,32 @@
                         </button>
                     </div>
                 </form>
+                <hr />
+               
+                    <div class="col-md-6">
+                        <div class="form-group mb-2">
+                            <button type="submit" class="btn btn-danger-outline" data-bs-toggle="modal" href="#deleteModal" role="button">
+                                <i class="fa-solid fa-circle-exclamation"></i> Slet bruger
+                            </button>
+                        </div>
+
+                        <form action="/api/@me/delete?_method=DELETE" method="post" class="modal fade" id="deleteModal" aria-hidden="true" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title">Er du sikker?</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-muted">
+                                    <p>Du er ved at slette din bruger, er du sikker på du vil gøre dette? Dette kan ikke fortrydes.</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="submit" class="btn btn-danger-outline" data-bs-toggle="modal">Ja, slet min konto.</button>
+                                </div>
+                              </div>
+                            </div>
+                    </form>
+                </div>
             </div>
         </div>
     </body>

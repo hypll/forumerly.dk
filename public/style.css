@@ -5,12 +5,17 @@
 :root {
     --main-color: #485460;
     --dark-color: #151418;
+    --danger-color: #ff5252;
+    --green-color: #00bfa5;
+    --warning-color: #fec106;
 }
 
 body {
     background-color: #eee;
 }
 
+/* Dark Mode Styles */
+/* ================================== */
 .dark-mode {
     background-color: var(--dark-color);
     color: var(--main-color);
@@ -20,8 +25,50 @@ body {
     color: black !important;
 }
 
+.dark-mode .btn-danger-outline:hover {
+    border-color: #dc3545 !important;
+}
+
+.dark-mode .btn-sort:hover {
+    border-color: white !important;
+    color: white !important;
+    background: none !important;
+}
+
+.dark-mode .btn-green:hover {
+    background-color: #15754a !important;
+    color: white;
+}
+
+.dark-mode .dark-mode-title {
+    color: #cdcecf !important;
+}
+
+.dark-mode .dark-mode-medium {
+    color: #eee !important;
+}
+
+.dark-mode nav {
+    margin: 0 !important;
+    color: white !important;
+    border-radius: 0px !important;
+}
+
+.dark-mode .dropdown-toggle {
+    color: whitesmoke !important;
+    background: none !important;
+}
+
+.dark-mode .dropdown-toggle:hover {
+    color: white !important;
+}
+
+.dark-mode
+
+/* ================================== */
+
 .navbar {
-    background-color: var(--main-color);
+    background-color: #485460;
     color: #fff;
     margin: 4px;
     border-radius: 7px;

@@ -7,7 +7,9 @@ const { tags } = require("../../config.json");
 const { ensureAuth, ensureGuest } = require("../middleware/requireAuth");
 
 router.get("/", (req, res) => {
-    res.render("index");
+    res.render("index", {
+        user: req.user,
+    });
 });
 
 router.get("/forum", async (req, res) => {
@@ -36,6 +38,7 @@ router.get("/forum/d/:id", async (req, res) => {
                 comments: await Comment.find({ post: discussion.id }).sort({
                     createdAt: -1,
                 }),
+                postAuthor: await User.findById(discussion.user),
                 post: discussion,
                 success: req.flash("success"),
             });

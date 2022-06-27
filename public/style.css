@@ -16,6 +16,10 @@ body {
     color: var(--main-color);
 }
 
+.dark-mode .kategori-description {
+    color: black !important;
+}
+
 .navbar {
     background-color: var(--main-color);
     color: #fff;

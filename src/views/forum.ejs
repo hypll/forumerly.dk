@@ -31,7 +31,15 @@
         <script src="./script.js" defer></script>
         <title>Forumerly</title>
     </head>
-    <body>
+
+    <% if (user) { %> 
+    <% if (user.darkmode === "true")  {%> 
+        <body class="dark-mode">
+        <% } else { %>
+        <body>
+        <% } %>
+    <% } %>
+        
         <%- include("./components/Navbar.ejs") %> <%-
         include("./components/loader.ejs") %>
         <div class="container mt-5">

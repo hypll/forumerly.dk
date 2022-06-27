@@ -68,8 +68,14 @@
                                 id="darkmode"
                                 name="darkmode"
                             >
+                                <% if (user.darkmode === "true") { %> 
                                 <option value="true">Aktiv</option>
                                 <option value="false">Inaktiv</option>
+                                <% } else { %>
+                                    <option value="false">Inaktiv</option>
+                                    <option value="true">Aktiv</option>
+                                <% } %> 
+                                
                             </select>
                         </div>
 

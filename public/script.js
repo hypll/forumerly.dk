@@ -43,7 +43,7 @@ fetch("/api/categories", {
             <div class="card kategori">
                 <div class="card-body">
               <h5 class="card-title">${kategori.name}</h5>
-                <p class="card-text text-muted">
+                <p class="card-text text-muted kategori-description">
                 ${kategori.description}
              </p>
             </div>

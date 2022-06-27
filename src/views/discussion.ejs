@@ -31,7 +31,14 @@
         <script src="../../script.js" defer></script>
         <title>Forumerly Discussion- <%= post.title %></title>
     </head>
-    <body>
+    <% if (user) { %> 
+        <% if (user.darkmode === "true")  {%> 
+            <body class="dark-mode">
+            <% } else { %>
+            <body>
+            <% } %>
+        <% } %>
+        
         <%- include("./components/Navbar.ejs") %> <%-
         include("./components/loader.ejs") %>
 
@@ -99,14 +106,6 @@
                                         </a>
                                         - <%= comment.content %>
                                     </p>
-
-                                    <!-- <button
-                                        class="btn btn-primary"
-                                        type="button"
-                                        disabled
-                                    >
-                                        Disabled button
-                                    </button> -->
                                 </span>
                             </div>
                             <div style="align-items: center">
